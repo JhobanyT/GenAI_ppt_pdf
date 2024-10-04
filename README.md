@@ -44,6 +44,9 @@ Verificar las dependencias instaladas
 LibreOffice: Algunas funcionalidades dependen de LibreOffice para la manipulación de documentos. Asegúrate de tenerlo instalado en tu sistema antes de ejecutar el proyecto. Puedes descargar la versión correcta desde el siguiente enlace:
 LibreOffice 24.2.6 para Windows
 
+- Agregar al path de variables de entorno (C:\Program Files\LibreOffice\program)
+- Verificar la version (soffice --version)
+
 **NOTA IMPORTANTE AGREGAR LAS SIGUIENTES CARPETAS EN LA RUTA RAIZ**
 
 - Cache
