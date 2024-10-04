@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>UPeU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">    
+    <meta name="viewport" content="width=800, initial-scale=1" />
+    <meta charset="UTF-8">
+    <style>
+      body {
+        font-family: Quicksand, sans-serif;
+        background-color: #f3f4f6;
+        color: #2d2d2d;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      #left-panel, #right-panel {
+        padding: 20px;
+        overflow-y: auto;
+      }
+
+      #left-panel {
+        width: 50%;
+        background-color: #f9fafb;
+      }
+
+      #right-panel {
+        width: 50%;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      h1 {
+        background: linear-gradient(135deg, #031655, #0658cb);
+        color: #fff;
+        display: inline-block;
+        font-size: 2em;
+        margin: 0;
+        padding: 15px 25px;
+        border-radius: 12px;
+        font-family: 'Quicksand', sans-serif;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      a {
+        color: #6e8efb;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      #userInput {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      #textInput {
+        width: 100%;
+        background-color: #e4e7ec;
+        border: none;
+        border-radius: 8px;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 16px;
+        margin-bottom: 10px;
+        padding: 15px;
+        color: #2d2d2d;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        resize: none;
+      }
+
+      #textInput:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(110, 142, 251, 0.8);
+      }
+
+      .userText, .botText {
+        width: 80%;
+        margin: 0 auto;
+        animation: pulse .5s ease-in-out;
+      }
+
+      .userText p, .botText p {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        padding: 15px;
+        border-radius: 12px;
+        margin: 20px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        white-space: pre-wrap;
+      }
+
+      .userText p {
+        background: linear-gradient(135deg, #e4e7ec, #f3f4f6);
+        color: #2d2d2d;
+      }
+
+      .botText p {
+        background: linear-gradient(135deg, #ffffff, #dfe1e6);
+        color: #2d2d2d;
+      }
+
+      .botText a {
+        color: #6e8efb;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .botText a:hover {
+        text-decoration: underline;
+      }
+
+      .botText img {
+        border-radius: 12px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 100%;
+      }
+
+      @keyframes pulse {
+        from {
+          transform: scale3d(1, 1, 1);
+        }
+        50% {
+          transform: scale3d(1.05, 1.05, 1.05);
+        }
+        to {
+          transform: scale3d(1, 1, 1);
+        }
+      }
+
+      #slideCount {
+          width: 100%; /* Ocupa todo el ancho del contenedor */
+          padding: 10px; /* Espaciado interno */
+          border: 2px solid #cd9fa2; /* Borde de color personalizado */
+          border-radius: 5px; /* Bordes redondeados */
+          font-size: 16px; /* Tamaño de fuente */
+          font-family: 'PT Serif', serif; /* Tipo de letra personalizado */
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+          transition: border-color 0.3s; /* Transición suave para el borde */
+      }
+
+      #slideCount::placeholder {
+          color: #aaa; /* Color del texto del placeholder */
+          opacity: 0.8; /* Opacidad del placeholder */
+      }
+
+      #slideCount:focus {
+          border-color: #cd9fa2; /* Cambia el color del borde al enfocar */
+          outline: none; /* Quita el contorno por defecto */
+          box-shadow: 0 0 5px rgba(205, 159, 162, 0.5); /* Sombra más intensa al enfocar */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="left-panel">
+      <center>
+        <h1>
+          Generador de Diapositivas
+        </h1>
+      </center>
+      <div class="boxed">
+        <div id="chatbox"></div>
+        <div id="userInput">
+            <textarea id="textInput" type="text" autofocus="autofocus" name="msg" placeholder="Ingresa el tema aquí..."></textarea>
+            <input id="slideCount" type="number" min="1" placeholder="Número de diapositivas" />
+            <div>
+                <p>Selecciona el diseño de la presentación:</p>
+                <label>
+                    <input type="radio" name="design" value="1" checked> Diseño 1
+                </label>
+                <label>
+                    <input type="radio" name="design" value="2"> Diseño 2
+                </label>
+                <label>
+                    <input type="radio" name="design" value="3"> Diseño 3
+                </label>
+                <label>
+                    <input type="radio" name="design" value="4"> Diseño 4
+                </label>
+                <label>
+                    <input type="radio" name="design" value="5"> Diseño 5
+                </label>
+                <label>
+                    <input type="radio" name="design" value="6"> Diseño 6
+                </label>
+                <label>
+                    <input type="radio" name="design" value="7"> Diseño 7
+                </label>
+                <label>
+                    <input type="radio" name="design" value="8"> Diseño 8
+                </label>
+                <label>
+                    <input type="radio" name="design" value="9"> Diseño 9
+                </label>
+                <label>
+                    <input type="radio" name="design" value="10"> Diseño 10
+                </label>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="right-panel" style="background-image: url('https://upeu.edu.pe/wp-content/uploads/2024/03/C-Juliaca.jpg'); background-size: cover; background-position: center; padding: 20px; height: 100vh;">
+      <!-- Visualizador de PDF aquí -->
+      <iframe id="pdfViewer" src="" width="90%" height="90%" frameborder="0" style="display: none;"></iframe>
+      <div id="pdfPlaceholder" style="display: block; text-align: center;">
+          <H2 style="color: white;"><B>Genera tu diapositiva</B></H2>
+      </div>
+    </div>
+
+    <script>
+      var textInput = document.getElementById("textInput");
+      var chatBox = document.getElementById("chatbox");
+      var pdfViewer = document.getElementById("pdfViewer");
+      var pdfPlaceholder = document.getElementById("pdfPlaceholder");
+      var slideCountInput = document.getElementById("slideCount"); // Captura del campo de número de diapositivas
+
+      // Captura de los botones de opción
+      var designInputs = document.querySelectorAll('input[name="design"]');
+
+      function renderStartMessage(msg, className) {
+        var msgHtml = document.createElement("div");
+        msgHtml.appendChild(document.createElement("p"))
+               .appendChild(document.createElement("span"))
+               .appendChild(document.createTextNode(msg));
+        msgHtml.className = className;
+        return msgHtml;
+      }
+
+      function renderMessage(link, pdfLink, className) {
+        var msgHtml = document.createElement("div");
+        var para = msgHtml.appendChild(document.createElement("p"));
+        var span = para.appendChild(document.createElement("span"));
+        
+        span.appendChild(document.createTextNode("Las diapositivas están listas!\nDescarga aquí: "));
+        var linkQA = document.createElement("a");
+        linkQA.href = link;
+        linkQA.appendChild(document.createTextNode("Descargar PPTX"));
+        linkQA.download = link;
+        linkQA.target = "_blank";
+        span.appendChild(linkQA);
+        
+        // Añadir el enlace al PDF
+        var pdfLinkEl = document.createElement("a");
+        pdfLinkEl.href = pdfLink;
+        pdfLinkEl.appendChild(document.createTextNode("Ver PDF"));
+        pdfLinkEl.target = "_blank";
+        pdfLinkEl.style.display = "block";
+        span.appendChild(pdfLinkEl);
+
+        msgHtml.className = className;
+        return msgHtml;
+      }
+
+      function writeAsUser(msg) {
+        chatBox.appendChild(renderStartMessage(msg, "userText"));
+        scrollToBottom();
+      }
+
+      function writeStartMessage(msg) {
+        chatBox.appendChild(renderStartMessage(msg, "botText"));
+        scrollToBottom();
+      }
+
+      function writeAsBot(link, pdfLink) {
+        chatBox.appendChild(renderMessage(link, pdfLink, "botText"));
+        updatePptxViewer(pdfLink);
+        scrollToBottom();
+      }
+
+      function updatePptxViewer(pdfUrl) {
+        pdfViewer.src = pdfUrl;
+        pdfViewer.style.display = "block";
+        pdfPlaceholder.style.display = "none";
+      }
+
+      function scrollToBottom() {
+          textInput.scrollIntoView({ block: "start", behavior: "smooth" });
+      }
+
+      function talkToBot() {
+        // Interacion
+        var rawText = textInput.value;
+        textInput.value = "";
+        textInput.setAttribute("style", "height: 31px;overflow-y:hidden;");
+        
+        writeAsUser(rawText);
+
+        // Capturamos el diseño seleccionado
+        var selectedDesign = Array.from(designInputs).find(input => input.checked).value;
+        console.log("Selected design:", selectedDesign);
+
+        // Capturamos el número de diapositivas
+        var slideCount = slideCountInput.value;
+
+        fetch("/get?" + new URLSearchParams({
+            msg: rawText,
+            design: selectedDesign,
+            slides: slideCount
+        }))
+        //
+        .then(response => response.json())  
+        .then(responseJson => {
+            if (responseJson.pptx && responseJson.pdf) {
+              // Respuesta
+                writeAsBot(responseJson.pptx, responseJson.pdf);
+              // 
+            } else {
+                writeAsBot("Hubo un error al generar el enlace de descarga.");
+            }
+        })
+        .catch(error => {
+            writeAsBot("Hubo un error al comunicarse con el servidor.");
+            console.error(error);
+        });
+      }
+
+      textInput.setAttribute("style", "height: 31px;overflow-y:hidden;");
+      textInput.addEventListener("input", OnInput, false);
+
+      function OnInput() {
+        if (this.value === "") {
+          this.style.height = '31px';
+          this.focus();
+        } else {
+          this.style.height = 0;
+          this.style.height = (this.scrollHeight) + "px";
+        }
+      }
+      
+      textInput.addEventListener('keypress', e => {
+        if (e.which == 13 && e.shiftKey == false && textInput.value.length > 2) {
+          talkToBot();
+          if(event.preventDefault) event.preventDefault();
+          return false;
+        }
+      });
+
+      // writeStartMessage("Hola!\n¡Utiliza inteligencia artificial para generar presentaciones de PowerPoint completas!\nAdemás, se crean marcadores de posición para imágenes.\n\n¿Sobre qué quieres una presentación?\n\nEjemplos:\n-Cómo criar hormigas. -7\n-Descubrimiento del espacio (mín. 10 diapositivas)\n-Realizar películas y los desafíos\n\nPara cambiar el diseño de la presentación de PowerPoint, al final de tu mensaje puedes, por ejemplo, agregar -2 (1-7).\nDiseños más comunes: -1 (Sobre, Estándar), -5 (Madera), -6 (Limpio, Azul claro), -7 (Negro, Blanco)\n");
+  </script>
+</body>
+</html>
