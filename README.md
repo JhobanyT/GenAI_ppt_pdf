@@ -45,6 +45,7 @@ LibreOffice: Algunas funcionalidades dependen de LibreOffice para la manipulaci√
 LibreOffice 24.2.6 para Windows
 
 **NOTA IMPORTANTE AGREGAR LAS SIGUIENTES CARPETAS EN LA RUTA RAIZ**
-Cache
-GeneratedPdf
-GeneratedPresentations
+
+- Cache
+- GeneratedPdf
+- GeneratedPresentations
